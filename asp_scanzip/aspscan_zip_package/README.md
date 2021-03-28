@@ -1,4 +1,4 @@
-## 卓望安全扫描报告系统 ScanProject
+## 安全扫描报告工具 ScanProject
 
 ###1. 简介
 
