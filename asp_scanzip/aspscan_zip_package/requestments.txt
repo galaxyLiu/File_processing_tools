@@ -1,0 +1,6 @@
+#env python3
+elasticsearch
+bs4
+lxml
+xlrd
+xlwt
