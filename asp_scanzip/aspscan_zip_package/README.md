@@ -32,9 +32,9 @@
 
 ## 
 
-### 瑞雪报告输出
+### 报告输出
 
-#####  app_new_report_job() ：瑞雪安全报告，信息港、呼池、哈池处理方法
+#####  app_new_report_job() :报告处理方法
 
 ##### a. handle_scan_data() :此任务是对网页报告进行爬虫处理，并录入到 es 集群中。
 
@@ -44,7 +44,7 @@
 
 
 
-##### feichi_scan_report()瑞雪安全报告，非池处理方法 
+##### feichi_scan_report():个性化处理方法 
 
 ##### a. handle_feichi_scan_data()：此任务是对网页报告进行爬虫处理，并录入到 es 集群中。
 
