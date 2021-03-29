@@ -3,14 +3,10 @@
 
 import xlrd
 
-from config.dev import file_name
+from config.dev import file_name, sheet_name_list
 from apps.handle_umsLog import handle_umslog
-from page_tasks.excel_baseline import merge_ums_baseline_data
-from page_tasks.excel_traffic import merge_ums_traffic_data
-from page_tasks.handle_system import handle_system_inspection_index
-from page_tasks.handle_baseline import handle_baseline_indicators
-from page_tasks.handle_traffic import handle_traffic_dimension_index
-from page_tasks.excel_system import merge_ums_system_data
+from page_tasks.handle_system import handle_inspection_index
+from page_tasks.excel_system import merge_ums_item_data
 
 
 def handle_all_excelInfo():
@@ -21,16 +17,15 @@ def handle_all_excelInfo():
     3、将各巡检指标信息与日志信息做整合输出至excel中
     :return:
     """
-    umslog_data = handle_umslog()
     with xlrd.open_workbook(file_name) as workbook:
         name_sheets = workbook.sheet_names()  # 获取Excel的sheet表列表，存储是sheet表名
         for index in name_sheets:  # for 循环读取每一个sheet表的内容
-            if index == "系统巡检指标":
-                system_data = handle_system_inspection_index(workbook, index)
-                merge_ums_system_data(umslog_data, system_data)
-            elif index == "基线巡检指标":
-                baseline_data = handle_baseline_indicators(workbook, index)
-                merge_ums_baseline_data(umslog_data, baseline_data)
-            elif index == "交维巡检指标":
-                traffic_data = handle_traffic_dimension_index(workbook, index)
-                merge_ums_traffic_data(umslog_data, traffic_data)
+            if index in sheet_name_list:
+                print(index)
+                # 获取到每个index，去获取对应的数据,获取每页数据执行一致，调用一个方法，不一致再方法中再分别获取
+                # 每页的数据获取是可以适配的，umslog的数据获取参数传递
+                inspection_data = handle_inspection_index(workbook, index)
+                umslog_data = handle_umslog(index)
+                merge_ums_item_data(umslog_data, inspection_data, index)
+            else:
+                print(">>>>请查看配置文件中sheet_name_list定义是否与巡检指标中文件一致！！！")

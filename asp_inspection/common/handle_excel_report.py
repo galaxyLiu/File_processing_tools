@@ -7,7 +7,7 @@ from config.dev import header_inspection_index
 from utils.xls import XlwtObj
 
 
-def handle_excel_data(datas, header_title, excel_name):
+def handle_excel_data(datas, header_title, excel_name,sheet):
     """
     按规范生成excel表
     :param datas: 合并后的ums及巡检数据
@@ -15,6 +15,7 @@ def handle_excel_data(datas, header_title, excel_name):
     :param excel_name: 文件名称，系统、交维、基线各文件名称
     :return:
     """
+    excel_name = excel_name+"%s巡检报表.xls" %sheet
     xlwtobj = XlwtObj(excel_name)
 
     # 文字居中样式

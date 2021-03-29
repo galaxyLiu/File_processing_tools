@@ -4,29 +4,35 @@
 from utils.merge_cell import merge_cell, list_dic
 
 
-def handle_system_inspection_index(workbook, index):
+def handle_inspection_index(workbook, index):
     apply_dic = []
     sheet_info = workbook.sheet_by_name(index)  # 根据表名获取表中的所有内容，sheet_info也是列表，列表中的值是每个单元格里值
     first_line = sheet_info.row_values(0)  # 获取首行，我这里的首行是表头，用表头作为字典的key，每一行数据对应表头的value，每一行组成一个字典
     # 将表头名称转换成标准对接格式的key，first_line类型为List
     first_line_list = []
     first_title = ""
-    # print(first_line)
     for title in first_line:
-        if title == '检查分组':
+        # 检查分组 巡检项 子项 对应指标项中A列 B列 H列
+        # 检查分组
+        if first_line.index(title) == 0:
             first_title = "check_subitem"
+        # 巡检项
+        elif first_line.index(title) == 1:
+            first_title = "inspection_item"
+        # 子项
+        elif first_line.index(title) == 7:
+            first_title = "child_item"
+
         elif title == '序号':
             first_title = "aspnode_index"
         elif title == '优先级分组':
             first_title = "priority_group"
-        elif title == '指标名':
-            first_title = "index_name"
+        elif title == '指标项运算符':
+            first_title = "item_operator"
         elif title == '运算符':
             first_title = "operator"
         elif title == '正常阈值':
             first_title = "normal_threshold"
-        elif title == '大类':
-            first_title = "equipment_category"
         elif title == '是否执行':
             first_title = "grouping_status"
         else:

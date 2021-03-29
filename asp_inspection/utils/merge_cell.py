@@ -25,7 +25,6 @@ def merge_cell(sheet_info):
             # Merge Vertical Cells
             for n in range(rhigh - rlow - 1):
                 merge[(rlow + n + 1, clow)] = value_mg_cell
-    # print("merge",merge)
     return merge
 
 

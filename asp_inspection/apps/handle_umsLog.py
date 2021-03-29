@@ -11,7 +11,6 @@ def path_name(path):
     :param path: ums日志文件路径,日志文件命名格式ip_umslog
     :return:组装好的数据字典 {'ip':xxx,index_list:[{},{}...]}
     """
-
     result_list = []
     datanames = os.listdir(path)
     # 获取到所有umslog文件
@@ -126,6 +125,13 @@ def data_assembly(lists):
     return result
 
 
-def handle_umslog():
-    umsLog_data = path_name(umsLog_name)
-    return umsLog_data
+def handle_umslog(sheet_name):
+    ums_path = umsLog_name + sheet_name
+    # 判断路径是否存在，可能存在文件路径命名错误问题
+    print(ums_path)
+    print(os.path.exists(ums_path))
+    if os.path.exists(ums_path):
+        umsLog_data = path_name(ums_path)
+        return umsLog_data
+    else:
+        print(">>>>请查看配置文件中sheet_name_list定义是否与umslog中子文件命名一致！！！")
