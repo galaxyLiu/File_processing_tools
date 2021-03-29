@@ -8,7 +8,6 @@
 #### Windows+python3/Linux+python3
 
 ## 模块
-#env python3
 elasticsearch
 bs4
 lxml
